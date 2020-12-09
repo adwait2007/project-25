@@ -3,9 +3,12 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
-var paper,dustbin1,dustbin2,dustbin3,ground,paperIMG,dustbinIMG;
-var 
+var paper,dustbin1,dustbin2,dustbin3,ground;
+var dustbin,dustbinIMG;
 
+function preload(){
+    dustbinIMG=loadImage("dustbingreen.png");
+}
 
 function setup() {
 	createCanvas(800, 700);
@@ -14,12 +17,16 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
+	dustbin=createSprite(600,515,5,170);
+	dustbin.addImage(dustbinIMG)
+	dustbin.scale=0.5
+
 	//Create the Bodies Here.
-	paper=new Paper(100,570,50)
-	dustbin1=new Dustbin(600,590,10,200);
-	dustbin2=new Dustbin(700,550,100,10);
-	dustbin3=new Dustbin(500,550,100,10);
-	ground=new Ground(width/2,600,10,width);
+	paper=new Paper(150,570,50);
+	dustbin1=new Dustbin(600,590,120,10);
+	dustbin2=new Dustbin(655,515,10,160);
+	dustbin3=new Dustbin(545,515,10,160);
+	ground=new Ground(width/2,600,width,10);
 
 	Engine.run(engine);
   
@@ -28,7 +35,7 @@ function setup() {
 
 function draw() {
   rectMode(CENTER);
-  background(0);
+  background("white");
 
   paper.display();
   dustbin1.display();
@@ -44,7 +51,7 @@ function keyPressed(){
 	if(keyCode === UP_ARROW){
 
 		// your object is paper so that name you give.. try now
-		Matter.Body.applyForce(paper.body,paper.body.position,{x:85,y:-85})
+		Matter.Body.applyForce(paper.body,paper.body.position,{x:370,y:-370})
 
 
 	}
